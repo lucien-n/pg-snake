@@ -26,21 +26,14 @@ class Hud:
             return
         self.last_update_at = self.game.now
 
-        self.debug_lines["dt"] = {
-            "value": f"{(dt * 1_000):.2f}",
-            "label": "\u0394",
-            "unit": "ms",
-            "bg_color": Color.ORANGE,
-        }
+        self.debug("dt", f"{(dt * 1_000):.2f}", Symbol.DELTA, "ms", Color.ORANGE)
 
         self.fps_list.append(m.floor(self.game.clock.get_fps()))
         self.fps_list = self.fps_list[-30:]
 
-        self.debug_lines["fps"] = {
-            "label": "\u2211",
-            "value": m.floor(np.mean(self.fps_list)),
-            "bg_color": Color.RED,
-        }
+        self.debug(
+            "fps", m.floor(np.mean(self.fps_list)), Symbol.EPSYLON, "", Color.RED
+        )
 
         self.redraw()
 
@@ -61,6 +54,23 @@ class Hud:
         for rendered_line in self.rendered_lines:
             surface.blit(rendered_line, (0, h))
             h += rendered_line.get_height()
+
+    def debug(
+        self,
+        key: str,
+        value: any,
+        label: Symbol | str,
+        unit: str,
+        bg: Color = Color.DARK_BLUE,
+        fg: Color = Color.WHITE,
+    ):
+        self.debug_lines[key] = {
+            "label": str(label),
+            "value": str(value),
+            "unit": str(unit),
+            "bg_color": bg,
+            "fg_color": fg,
+        }
 
     def render_font(
         self,

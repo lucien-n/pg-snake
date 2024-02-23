@@ -29,3 +29,8 @@ class Color:
     GRAY = (134, 139, 156)
     DARK_GRAY = (65, 65, 86)
     BLACK = (0, 0, 0)
+
+
+class Symbol:
+    DELTA = "\u0394"
+    EPSYLON = "\u2211"
