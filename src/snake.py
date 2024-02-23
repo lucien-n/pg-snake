@@ -4,9 +4,12 @@ from random import randint
 
 
 class Snake:
-    def __init__(self, x: int = 0, y: int = 0, grid_size: int = 32) -> None:
+    def __init__(
+        self, x: int = 0, y: int = 0, grid_size: int = 32, color: Color = Color.LIME
+    ) -> None:
         self.parts = [vector(x, y)]
         self.grid_size = grid_size
+        self.color = color
 
         self.direction = vector()
 
@@ -66,6 +69,6 @@ class Snake:
             )
             pg.draw.rect(
                 target,
-                Color.GREEN,
+                self.color,
                 pg.Rect(part_screen_x, part_screen_y, CELL_SIZE, CELL_SIZE),
             )

@@ -61,8 +61,8 @@ class Game:
         pg.display.set_caption(f"fps {self.clock.get_fps():.1f}")
 
     def draw(self):
-        self.window.fill(Color.BLACK)
-        self.display.fill(Color.BLACK)
+        self.window.fill(Color.GRAY)
+        self.display.fill(Color.DARK_GRAY)
 
         self.fruit.draw(self.display)
         self.snake.draw(self.display)

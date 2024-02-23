@@ -4,12 +4,14 @@ from random import randint
 
 class Fruit:
 
-    def __init__(self, snake, grid_size: int = 32) -> None:
+    def __init__(self, snake, grid_size: int = 32, color: Color = Color.RED) -> None:
         from .snake import Snake
 
-        self.pos = vector()
         self.snake: Snake = snake
         self.grid_size = grid_size
+        self.color = color
+
+        self.pos = vector()
 
     def place(self):
         self.pos = vector(
@@ -26,6 +28,6 @@ class Fruit:
 
         pg.draw.rect(
             target,
-            Color.RED,
+            self.color,
             pg.Rect(fruit_screen_x, fruit_screen_y, CELL_SIZE, CELL_SIZE),
         )
