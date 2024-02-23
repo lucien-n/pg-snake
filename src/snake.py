@@ -13,6 +13,15 @@ class Snake:
 
         self.direction = vector()
 
+        self.head_sprite = pg.transform.scale(
+            pg.image.load("assets/sprites/snake_head.png").convert_alpha(),
+            (CELL_SIZE, CELL_SIZE),
+        )
+        self.body_sprite = pg.transform.scale(
+            pg.image.load("assets/sprites/snake_body.png").convert_alpha(),
+            (CELL_SIZE, CELL_SIZE),
+        )
+
     def handle_events(self, events: list[pg.Event]) -> None:
         for e in events:
             if e.type == pg.KEYDOWN:
@@ -62,13 +71,21 @@ class Snake:
             self.parts = self.parts[1:]
 
     def draw(self, target: pg.Surface):
-        for part in self.parts:
-            part_screen_x, part_screen_y = (
+        for i, part in enumerate(self.parts):
+            x, y = (
                 part.x * CELL_SIZE,
                 part.y * CELL_SIZE,
             )
-            pg.draw.rect(
-                target,
-                self.color,
-                pg.Rect(part_screen_x, part_screen_y, CELL_SIZE, CELL_SIZE),
-            )
+
+            if i == len(self.parts) - 1:
+                angle = 0
+                if self.direction.x == 1:
+                    angle = 270
+                if self.direction.x == -1:
+                    angle = 90
+                if self.direction.y == 1:
+                    angle = 180
+
+                target.blit(pg.transform.rotate(self.head_sprite, angle), (x, y))
+            else:
+                target.blit(self.body_sprite, (x, y))

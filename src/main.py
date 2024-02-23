@@ -22,7 +22,7 @@ class Game:
         self.prev_time = 0
 
         self.last_fixed_update_at = 0
-        self.fixed_update_rate = 1 / 10
+        self.fixed_update_rate = 1 / 5
 
         self.running = True
 
