@@ -12,6 +12,7 @@ class Snake:
         self.color = color
 
         self.direction = vector()
+        self.old_direction = vector()
 
         self.head_sprite = pg.transform.scale(
             pg.image.load("assets/sprites/snake_head.png").convert_alpha(),
@@ -27,22 +28,22 @@ class Snake:
             if e.type == pg.KEYDOWN:
                 # right
                 if e.key == pg.K_d:
-                    if self.direction.x == -1:
+                    if self.old_direction.x == -1:
                         continue
                     self.direction = vector(1, 0)
                 # left
                 if e.key == pg.K_a:
-                    if self.direction.x == 1:
+                    if self.old_direction.x == 1:
                         continue
                     self.direction = vector(-1, 0)
                 # down
                 if e.key == pg.K_s:
-                    if self.direction.y == -1:
+                    if self.old_direction.y == -1:
                         continue
                     self.direction = vector(0, 1)
                 # up
                 if e.key == pg.K_w:
-                    if self.direction.y == 1:
+                    if self.old_direction.y == 1:
                         continue
                     self.direction = vector(0, -1)
 
@@ -50,6 +51,8 @@ class Snake:
         pass
 
     def fixed_update(self, dt: float, fruit: Fruit) -> None:
+        self.old_direction = self.direction
+
         head = self.parts[-1]
         new_head = head + self.direction
 
