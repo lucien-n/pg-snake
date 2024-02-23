@@ -8,7 +8,7 @@ CELL_SIZE = 32
 
 settings = {
     "display": {"width": 1280, "height": 720, "display": 0},
-    "grid": {"size": 32},
+    "grid": {"size": 16},
 }
 
 
