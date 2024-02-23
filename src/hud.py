@@ -31,9 +31,7 @@ class Hud:
         self.fps_list.append(m.floor(self.game.clock.get_fps()))
         self.fps_list = self.fps_list[-30:]
 
-        self.debug(
-            "fps", m.floor(np.mean(self.fps_list)), Symbol.EPSYLON, "", Color.RED
-        )
+        self.debug("fps", m.floor(np.mean(self.fps_list)), Symbol.EPSYLON, bg=Color.RED)
 
         self.redraw()
 
@@ -60,7 +58,7 @@ class Hud:
         key: str,
         value: any,
         label: Symbol | str,
-        unit: str,
+        unit: str = "",
         bg: Color = Color.DARK_BLUE,
         fg: Color = Color.WHITE,
     ):
