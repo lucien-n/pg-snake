@@ -45,6 +45,7 @@ class Game:
                     self.running = False
 
         self.snake.handle_events(events)
+        self.hud.handle_events(events)
 
     def update_dt(self):
         self.now = time.time()

@@ -19,7 +19,15 @@ class Hud:
         self.debug_lines = {}
         self.rendered_lines = []
 
+        self.show_debug = False
+
         self.fps_list = []
+
+    def handle_events(self, events: list[pg.Event]):
+        for e in events:
+            if e.type == pg.KEYDOWN:
+                if e.key == pg.K_F3:
+                    self.show_debug = not self.show_debug
 
     def update(self, dt: float):
         if self.game.now - self.last_update_at < self.update_interval:
@@ -48,10 +56,11 @@ class Hud:
             self.rendered_lines.append(rendered_line)
 
     def draw(self, surface: pg.Surface, *args):
-        h = 0
-        for rendered_line in self.rendered_lines:
-            surface.blit(rendered_line, (0, h))
-            h += rendered_line.get_height()
+        if self.show_debug:
+            h = 0
+            for rendered_line in self.rendered_lines:
+                surface.blit(rendered_line, (0, h))
+                h += rendered_line.get_height()
 
     def debug(
         self,
