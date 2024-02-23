@@ -57,16 +57,16 @@ class Game:
 
         self.hud.update(self.dt)
 
-        self.hud.debug("snake.pos", self.snake.parts[-1], "POS")
-        self.hud.debug("snake.dir", self.snake.direction, "DIR")
-        self.hud.debug("fruit.pos", self.fruit.pos, "FRUIT")
-
     def fixed_update(self):
         if self.now - self.last_fixed_update_at < self.fixed_update_rate:
             return
         self.last_fixed_update_at = self.now
 
         self.snake.fixed_update(self.dt, self.fruit)
+
+        self.hud.debug("snake.pos", self.snake.parts[-1], "POS")
+        self.hud.debug("snake.dir", self.snake.direction, "DIR")
+        self.hud.debug("fruit.pos", self.fruit.pos, "FRUIT")
 
     def draw(self):
         self.window.fill(Color.GRAY)
