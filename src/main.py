@@ -71,7 +71,7 @@ class Game:
 
     def draw(self):
         self.window.fill(Color.GRAY)
-        self.display.fill(Color.DARK_GRAY)
+        self.display.fill(Color.DARK_GREEN)
 
         self.fruit.draw(self.display)
         self.snake.draw(self.display)
