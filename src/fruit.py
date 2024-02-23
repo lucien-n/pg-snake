@@ -4,12 +4,16 @@ from random import randint
 
 class Fruit:
 
-    def __init__(self, snake, grid_size: int = 32, color: Color = Color.RED) -> None:
+    def __init__(self, snake, grid_size: int = 32) -> None:
         from .snake import Snake
 
         self.snake: Snake = snake
         self.grid_size = grid_size
-        self.color = color
+
+        self.image = pg.transform.scale(
+            pg.image.load("assets/sprites/apple.png").convert_alpha(),
+            (CELL_SIZE, CELL_SIZE),
+        )
 
         self.pos = vector()
 
@@ -26,8 +30,4 @@ class Fruit:
             self.pos.y * CELL_SIZE,
         )
 
-        pg.draw.rect(
-            target,
-            self.color,
-            pg.Rect(fruit_screen_x, fruit_screen_y, CELL_SIZE, CELL_SIZE),
-        )
+        target.blit(self.image, (fruit_screen_x, fruit_screen_y))
