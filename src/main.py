@@ -1,5 +1,6 @@
 import sys
 
+from .hud import Hud
 from .settings import *
 from .fruit import Fruit
 from .snake import Snake
@@ -26,9 +27,12 @@ class Game:
         self.running = True
 
         self.grid_size = settings["grid"]["size"]
+
         self.snake = Snake(0, 0, self.grid_size)
         self.fruit = Fruit(self.snake, self.grid_size)
         self.fruit.place()
+
+        self.hud = Hud(self)
 
     def handle_events(self):
         events = pg.event.get()
@@ -51,6 +55,8 @@ class Game:
         self.update_dt()
         self.fixed_update()
 
+        self.hud.update(self.dt)
+
     def fixed_update(self):
         if self.now - self.last_fixed_update_at < self.fixed_update_rate:
             return
@@ -70,6 +76,9 @@ class Game:
         scaled = pg.transform.scale(self.display, (self.size[1], self.size[1]))
         dest = (m.floor(self.size[0] / 2 - scaled.get_width() / 2), 0)
         self.window.blit(scaled, dest)
+
+        self.hud.draw(self.window)
+
         pg.display.update()
         self.clock.tick()
 

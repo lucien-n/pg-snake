@@ -30,6 +30,7 @@ class Hud:
             "value": f"{(dt * 1_000):.2f}",
             "label": "\u0394",
             "unit": "ms",
+            "bg_color": Color.ORANGE,
         }
 
         self.fps_list.append(m.floor(self.game.clock.get_fps()))
@@ -38,7 +39,7 @@ class Hud:
         self.debug_lines["fps"] = {
             "label": "\u2211",
             "value": m.floor(np.mean(self.fps_list)),
-            "bg_color": (218, 113, 127),
+            "bg_color": Color.RED,
         }
 
         self.redraw()
